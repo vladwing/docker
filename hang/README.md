@@ -1,5 +1,9 @@
 ## hang
 
+[![Docker Stars](https://img.shields.io/docker/stars/vladwing/hang.svg)](https://hub.docker.com/r/vladwing/hang/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/vladwing/hang.svg)](https://hub.docker.com/r/vladwing/hang/)
+[![ImageLayers](https://images.microbadger.com/badges/image/vladwing/hang.svg)](https://microbadger.com/#/images/vladwing/hang)
+
 This application does absolutely nothing. Once started, it will hang until a signal is received.
 
 ### Wait, what?
