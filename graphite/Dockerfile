@@ -36,6 +36,6 @@ RUN mv /opt/graphite/conf/local_settings.py /opt/graphite/webapp/graphite/ \
 EXPOSE 2003
 EXPOSE 2004
 EXPOSE 8080
-VOLUME /opt/graphite/static
+VOLUME /opt/graphite/storage
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor"]
