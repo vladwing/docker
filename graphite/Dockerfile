@@ -27,15 +27,13 @@ COPY config /opt/graphite/conf/
 RUN mv /opt/graphite/conf/local_settings.py /opt/graphite/webapp/graphite/ \
     && mv /opt/graphite/conf/graphite_wsgi.py /opt/graphite/webapp/graphite/ \
     && mv /opt/graphite/conf/nginx.conf /etc/nginx \
-    && mv /opt/graphite/conf/supervisord.conf /etc/supervisor \
+    && mv /opt/graphite/conf/supervisord.conf /etc/supervisord.conf \
     && python /usr/local/bin/setup-local-settings.py \
     && PYTHONPATH=/opt/graphite/webapp django-admin.py collectstatic --settings=graphite.settings --no-input \
     && PYTHONPATH=/opt/graphite/webapp django-admin.py makemigrations account events dashboard url_shortener --settings=graphite.settings \
     && PYTHONPATH=/opt/graphite/webapp django-admin.py migrate --settings=graphite.settings
 
-EXPOSE 2003
-EXPOSE 2004
-EXPOSE 8080
+EXPOSE 2003 2004 80
 VOLUME /opt/graphite/storage
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

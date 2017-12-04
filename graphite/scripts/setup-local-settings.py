@@ -7,11 +7,13 @@ import sys
 
 from django.utils.crypto import get_random_string
 
-## Add SECRET_KEY to local_settings.py
-settings_filename = '/opt/graphite/webapp/graphite/local_settings.py'
-secret_key = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#-_=+')
+SETTINGS_FILE = os.environ.get('SETTINGS_FILE', '/opt/graphite/webapp/graphite/local_settings.py')
 
-with open(settings_filename, 'a') as f:
-    f.write("SECRET_KEY = '%s'\n" % (secret_key, ))
-    if '--debug' in sys.argv:
-        f.write('DEBUG = True\n')
+def main():
+    secret_key = get_random_string(50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#-_=+')
+    with open(SETTINGS_FILE, "a+") as f:
+        f.write('SECRET_KEY = "' + secret_key + '"\n')
+
+if __name__ == "__main__":
+    ## Add SECRET_KEY to local_settings.py
+    main()
