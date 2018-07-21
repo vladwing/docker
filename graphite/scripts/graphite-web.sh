@@ -5,7 +5,10 @@ CHECK_FILE=/opt/graphite/post-setup-complete
 LOCAL=/usr/local/bin
 GUNICORN=/usr/bin/gunicorn
 
-( if [ ! -f "$CHECK_FILE" ] ; then
+( if [ -z "$(ls -A /opt/graphite/conf)" ]; then
+	echo "[Graphite] /opt/graphite/conf is empty. Copying default config."
+	cp /opt/graphite/initconfig/* /opt/graphite/conf
+fi ) && ( if [ ! -f "$CHECK_FILE" ] ; then
     echo "[graphite-web] Initializing local_settings.py and 'admin' user"
     $LOCAL/setup-local-settings.py && $LOCAL/post-setup-graphite-web.py && touch $CHECK_FILE
 fi ) && (
