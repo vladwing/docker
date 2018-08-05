@@ -13,5 +13,5 @@ fi ) && ( if [ ! -f "$CHECK_FILE" ] ; then
     $LOCAL/setup-local-settings.py && $LOCAL/post-setup-graphite-web.py && touch $CHECK_FILE
 fi ) && (
     echo "[graphite-web] starting ..."
-    $GUNICORN graphite_wsgi:application --workers 4 --bind 127.0.0.1:8000
+    $GUNICORN graphite_wsgi:application --proxy-protocol --workers 4 --bind 127.0.0.1:8000
 )
